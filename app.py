@@ -13,17 +13,11 @@ from transformers import (
     AutoModelForSeq2SeqLM
 )
 
-# =====================================================
-# LOAD ENV
-# =====================================================
 
 load_dotenv()
 
 MODEL_PATH = os.getenv("MODEL_PATH")
 
-# =====================================================
-# LOAD MODEL
-# =====================================================
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -37,15 +31,9 @@ model.to(device)
 
 print(f"Model loaded on {device}")
 
-# =====================================================
-# FASTAPI
-# =====================================================
 
 app = FastAPI()
 
-# =====================================================
-# EXTRACT TEXT
-# =====================================================
 
 def extract_pdf(file_path):
 
@@ -57,23 +45,6 @@ def extract_pdf(file_path):
         text += page.get_text()
 
     return text
-
-
-# def extract_txt(file_path):
-
-#     with open(file_path, "r", encoding="utf-8") as f:
-#         return f.read()
-
-
-# def extract_docx(file_path):
-
-#     doc = Document(file_path)
-
-#     text = "\n".join(
-#         [p.text for p in doc.paragraphs]
-#     )
-
-#     return text
 
 
 def extract_document(file_path):
@@ -92,9 +63,6 @@ def extract_document(file_path):
     else:
         raise Exception("Unsupported file")
 
-# =====================================================
-# CLEAN TEXT
-# =====================================================
 
 def clean_text(text: str) -> str:
     import re
@@ -113,10 +81,6 @@ def clean_text(text: str) -> str:
     text = re.sub(r'\s+', ' ', text)
 
     return text.strip()
-
-# =====================================================
-# SECTION EXTRACTION
-# =====================================================
 
 SECTION_PATTERNS = {
     "abstrak": [
@@ -200,10 +164,6 @@ def find_sections(text):
 
     return sections
 
-# =====================================================
-# CHUNKING
-# =====================================================
-
 def chunk_text(text, max_tokens=800):
 
     sentences = text.split(". ")
@@ -232,10 +192,6 @@ def chunk_text(text, max_tokens=800):
         chunks.append(current_chunk)
 
     return chunks
-
-# =====================================================
-# SUMMARIZATION
-# =====================================================
 
 def summarize_text(text):
 
@@ -298,9 +254,6 @@ def summarize_text(text):
 
     return final_summary
 
-# =====================================================
-# API
-# =====================================================
 
 @app.get("/")
 def root():
