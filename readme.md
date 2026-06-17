@@ -16,9 +16,13 @@ Download model fine-tuning dari Google Drive berikut:
 
 [https://drive.google.com/file/d/1pLW2-wZkdxxVYbDMBXjL-ZoehXiwIAyr/view?usp=sharing]
 
+atau 
+
+copy dari folder checkpoint-522 folder summarization-mt5 jika download folder keseluruhan (training, model, backend) 
+
 ---
 
-## 3. Extract Model
+## 2b. Extract Model (jika download zip)
 
 1. Extract file ZIP hasil download
 
@@ -43,7 +47,7 @@ project/
 
 ---
 
-## 4. Jalankan Backend
+## 3. Jalankan Backend
 
 Run server menggunakan:
 
@@ -59,7 +63,7 @@ INFO:     Uvicorn running on http://127.0.0.1:8000
 
 ---
 
-## 5. Swagger Documentation
+## 4. Swagger Documentation
 
 Buka browser:
 
